@@ -3,6 +3,7 @@ package RecipeFinder.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table
@@ -14,6 +15,13 @@ public class Users implements Serializable {
     @Column(unique = true)
     private String email;
     private String password;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_favourite_recipe",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+    Set<Recipe> favouriteRecipes;
 
     public Users(Long id, String name, String email, String password) {
         this.id = id;
