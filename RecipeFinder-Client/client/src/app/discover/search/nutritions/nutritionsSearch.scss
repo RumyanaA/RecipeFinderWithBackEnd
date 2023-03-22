@@ -1,0 +1,61 @@
+@import '../../../../colors'; 
+
+.sliders-wrapper{
+    display: flex;
+    flex-direction: column;
+    .nutrition-value{
+        width:90%;
+        margin:0;
+        text-align: right;
+    }
+.slider-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+
+    .label-style{
+        width: 17rem;
+        text-align: left;
+    }
+
+.slider {
+    margin-left:1rem;
+    -webkit-appearance: none;
+    width: 60%;
+    height: 1.2rem;
+    background: #d3d3d3;
+    border-radius: 5px;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    &:hover{
+        opacity: 1;
+    }
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    background: $main-brand-color;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: $main-brand-color;
+    cursor: pointer;
+  }
+}
+}
+.button-container{
+    margin-top:2rem;
+    display: flex;
+    justify-content: center;
+    margin-bottom:2rem;
+}

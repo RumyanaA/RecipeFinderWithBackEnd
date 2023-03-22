@@ -1,0 +1,12 @@
+@import '../../colors';
+
+.default-input{
+    border-radius: 8px;
+    display:block;
+    background-color: #f1f1f1;
+    padding: 0.6rem 1.2rem;
+    width:14.5rem;
+    height:3rem;
+    border: none;
+    border-bottom: 2px solid grey;
+}

@@ -1,0 +1,7 @@
+node_modules
+src/**/*.scss
+src/**/*.jpg
+logo.svg
+App.test.js
+App.css
+example-cooking-apiKey.txt

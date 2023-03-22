@@ -1,0 +1,56 @@
+@import './colors';
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding:3rem 3rem;
+    margin: 1.2rem 4.5rem;
+    box-shadow: 1px 1px 9px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    height: fit-content;
+    background-color: $content-wrapper-color;
+
+    .search-container{
+      display: flex;
+      height: 6rem;
+      flex-direction: column;
+      align-items: center;
+      .filters-container{
+        background-color: $secondary-color;
+        border-radius: 8px;
+        width:27rem;
+        height:8rem;
+        margin-top:1rem;
+        .arrow-down{
+          width:100%;
+          cursor: pointer;
+        }
+      }
+      
+
+      .filter-button{
+        border-radius: 8px;
+        border:none;
+        width: 3rem;
+        height:3rem;
+        color:$secondary-color;
+        background-color: $main-brand-color;
+        border-bottom: 2px solid grey;
+      }
+    }
+    .nav-cards{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .recipe-cards-container{
+      width:100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top:2rem;
+    }
+  }

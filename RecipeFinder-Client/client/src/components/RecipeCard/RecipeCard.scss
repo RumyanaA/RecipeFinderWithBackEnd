@@ -1,0 +1,52 @@
+@import "../../colors";
+
+.recipe-wrapper {
+  width: 13rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  margin: 0.5rem 2rem;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $secondary-color;
+  }
+
+  .recipe-img {
+    margin-top: 1rem;
+    width: 11rem;
+    border-radius: 8px;
+  }
+
+  .recipe-title {
+    width: 11rem;
+    text-align: center;
+    height: 7rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 42px;
+    position: relative;
+  }
+
+  .recipe-tooltip {
+    position: absolute;
+    left: 0rem;
+    text-align: center;
+    width: 100%;
+    visibility: hidden;
+    background-color: $secondary-color;
+    padding: 10px;
+    z-index: 1;
+    opacity: 0;
+    line-height: normal;
+    white-space: normal;
+  }
+  .recipe-title:hover .recipe-tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+}
