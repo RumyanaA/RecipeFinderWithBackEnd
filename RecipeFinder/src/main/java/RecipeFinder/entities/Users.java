@@ -3,6 +3,7 @@ package RecipeFinder.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,6 +16,9 @@ public class Users implements Serializable {
     @Column(unique = true)
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "addedBy")
+    private List<Recipe> recipes;
 
     @ManyToMany
     @JoinTable(

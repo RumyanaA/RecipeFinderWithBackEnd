@@ -1,4 +1,5 @@
 package RecipeFinder.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -16,6 +17,11 @@ public class Recipe {
     private Integer calories;
     private Integer carbs;
     private Integer protein;
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    @JsonIgnore
+    private Users addedBy;
+
     @ManyToMany
     @JoinTable(
             name = "recipe_product",
