@@ -18,7 +18,7 @@ public class Recipe {
     private Integer carbs;
     private Integer protein;
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "addedBy")
     @JsonIgnore
     private Users addedBy;
 
@@ -32,7 +32,7 @@ public class Recipe {
     @ManyToMany(mappedBy = "favouriteRecipes")
     Set<Users> user;
 
-    public Recipe(Long id, String title, String directions, String image, Integer fat, Integer calories, Integer carbs, Integer protein) {
+    public Recipe(Long id, String title, String directions, String image, Integer fat, Integer calories, Integer carbs, Integer protein, Users addedBy, Set<Product> ingredients, Set<Users> user) {
         this.id = id;
         this.title = title;
         this.directions = directions;
@@ -41,6 +41,9 @@ public class Recipe {
         this.calories = calories;
         this.carbs = carbs;
         this.protein = protein;
+        this.addedBy = addedBy;
+        this.ingredients = ingredients;
+        this.user = user;
     }
 
     public Recipe() {
@@ -108,5 +111,29 @@ public class Recipe {
 
     public void setProtein(Integer protein) {
         this.protein = protein;
+    }
+
+    public Users getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(Users addedBy) {
+        this.addedBy = addedBy;
+    }
+
+    public Set<Product> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Product> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public Set<Users> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<Users> user) {
+        this.user = user;
     }
 }
