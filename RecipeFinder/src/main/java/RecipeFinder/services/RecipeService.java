@@ -22,7 +22,10 @@ public class RecipeService {
     }
 
     public List<Recipe> getRecipesByText(String keyword, Long userId){
-        return recipeRepository.findByTitleContainsIgnoreCaseAndUser_IdOrderByTitleAsc(keyword, userId);
-        // if List.size() less than 10, fetch from External API
+        return recipeRepository.findByTitleContainsIgnoreCaseAndAddedBy_Id(keyword, userId);
+    }
+
+    public List<Recipe> getRecipesByNutritions(Integer carbs, Integer protein, Integer fat, Integer calories, Long addedBy) {
+        return recipeRepository.findByCarbsLessThanEqualAndProteinLessThanEqualAndFatLessThanEqualAndCaloriesLessThanEqualAndAddedBy_Id(carbs, protein,fat,calories, addedBy);
     }
 }

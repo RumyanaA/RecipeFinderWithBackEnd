@@ -1,13 +1,15 @@
 package RecipeFinder.controllers;
 
-import RecipeFinder.ExternalApiCLasses.ExternalApiResponse;
-import RecipeFinder.config.ExternalApiService;
+import RecipeFinder.ExternalApiClasses.ExternalApiResponse;
+import RecipeFinder.ExternalApiClasses.RecipeWithNutritionsApiResponse;
+import RecipeFinder.services.ExternalApiService;
 import RecipeFinder.entities.Recipe;
 import RecipeFinder.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -41,13 +43,28 @@ public class RecipeController {
             ExternalApiResponse externalapiResponse = restTemplate.getForObject(url,ExternalApiResponse.class);
             List<Recipe> externalRecipes = externalApiService.transformResponse(externalapiResponse);
             List<Recipe> combinedListOfRecipes = Stream.concat(userSavedRecipes.stream(), externalRecipes.stream()).toList();
-            System.out.println(combinedListOfRecipes.toString());
             return combinedListOfRecipes;
-
-//            return userSavedRecipes;
         }else{
             return userSavedRecipes;
         }
 
+    }
+
+    @GetMapping("/nutritions")
+    public List<Recipe> getRecipeByNutritions(@RequestParam Integer carbs, Integer protein, Integer fat, Integer calories, Long userId) {
+        List<Recipe> userSavedRecipes =  recipeService.getRecipesByNutritions(carbs, protein, fat, calories, userId);
+        if(userSavedRecipes.size() < 10){
+            String apiKey = externalApiService.getApiKey();
+            Integer numOfExternalRecipes = 10 - userSavedRecipes.size();
+            String url = "https://api.spoonacular.com/recipes/findByNutrients?maxCarbs="+carbs+"&maxProtein="+
+                    protein+"&maxCalories="+calories+"&maxFat="+fat+"&apiKey="+apiKey+"&number="+numOfExternalRecipes;
+            RestTemplate restTemplate = new RestTemplate();
+            RecipeWithNutritionsApiResponse[] externalApiResponse = restTemplate.getForObject(url,RecipeWithNutritionsApiResponse[].class);
+            List<Recipe> externalRecipes=externalApiService.removeUnitFromNutritions(Arrays.stream(externalApiResponse).toList());
+            List<Recipe> combinedListOfRecipes = Stream.concat(userSavedRecipes.stream(), externalRecipes.stream()).toList();
+            return combinedListOfRecipes;
+        }else{
+            return userSavedRecipes;
+        }
     }
 }

@@ -1,4 +1,4 @@
-package RecipeFinder.ExternalApiCLasses;
+package RecipeFinder.ExternalApiClasses;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package RecipeFinder.ExternalApiCLasses;
+package RecipeFinder.ExternalApiClasses;
 
 public class Result {
     private Long id;
