@@ -1,8 +1,7 @@
 package RecipeFinder.services;
 
-import RecipeFinder.ExternalApiClasses.ExternalApiResponse;
-import RecipeFinder.ExternalApiClasses.RecipeWithNutritionsApiResponse;
-import RecipeFinder.ExternalApiClasses.Result;
+import RecipeFinder.ExternalApiClasses.*;
+import RecipeFinder.entities.Product;
 import RecipeFinder.entities.Recipe;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +16,10 @@ public class ExternalApiService {
         return apiKey;
     }
 
-    public List<Recipe> transformResponse(ExternalApiResponse apiResponse){
+    public List<Recipe> transformRecipeResponse(ExternalRecipesResponse apiResponse){
         List<Recipe> transformedResponse = new ArrayList<>();
-        List<Result> result = apiResponse.getResult();
-            for(Result currentResult: result){
+        List<ExternalRecipe> result = apiResponse.getResults();
+            for(ExternalRecipe currentResult: result){
                 Recipe currentRecipe = new Recipe();
                 currentRecipe.setId(currentResult.getId());
                 currentRecipe.setTitle(currentResult.getTitle());
@@ -28,6 +27,18 @@ public class ExternalApiService {
                 transformedResponse.add(currentRecipe);
             }
             return transformedResponse;
+    }
+    public List<Product> transformProductResponse(ExternalIngredientsResponse apiResponse){
+        List<Product> transformedResponse = new ArrayList<>();
+        List<ExternalIngredient> result = apiResponse.getResults();
+        for(ExternalIngredient currentIngredient: result){
+            Product currentProduct = new Product();
+            currentProduct.setId(currentIngredient.getId());
+            currentProduct.setTitle(currentIngredient.getName());
+            currentProduct.setImage(currentIngredient.getImage());
+            transformedResponse.add(currentProduct);
+        }
+        return transformedResponse;
     }
 
     private Integer convertNutritionStringToInt(String nutrition){

@@ -1,30 +1,19 @@
 package RecipeFinder.ExternalApiClasses;
 
-import java.util.List;
-
-public class ExternalApiResponse {
-    private List<Result> results;
+public class BaseExternalApiResponse {
     private Integer offset;
     private Integer number;
     private Integer totalResults;
 
-    public ExternalApiResponse() {
+    public BaseExternalApiResponse() {
     }
 
-    public ExternalApiResponse(List<Result> results, Integer offset, Integer number, Integer totalResults) {
-        this.results = results;
+    public BaseExternalApiResponse(Integer offset, Integer number, Integer totalResults) {
         this.offset = offset;
         this.number = number;
         this.totalResults = totalResults;
     }
 
-    public List<Result>  getResult() {
-        return results;
-    }
-
-    public void setResults(List<Result> results) {
-        this.results = results;
-    }
 
     public Integer getOffset() {
         return offset;

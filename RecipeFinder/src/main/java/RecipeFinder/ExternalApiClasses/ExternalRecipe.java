@@ -1,15 +1,15 @@
 package RecipeFinder.ExternalApiClasses;
 
-public class Result {
+public class ExternalRecipe {
     private Long id;
     private String title;
     private String image;
     private String imageType;
 
-    public Result() {
+    public ExternalRecipe() {
     }
 
-    public Result(Long id, String title, String image, String imageType) {
+    public ExternalRecipe(Long id, String title, String image, String imageType) {
         this.id = id;
         this.title = title;
         this.image = image;

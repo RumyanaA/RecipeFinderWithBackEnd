@@ -1,7 +1,9 @@
 package RecipeFinder.controllers;
 
-import RecipeFinder.ExternalApiClasses.ExternalApiResponse;
+import RecipeFinder.ExternalApiClasses.ExternalRecipesResponse;
+import RecipeFinder.ExternalApiClasses.ExternalIngredientsResponse;
 import RecipeFinder.ExternalApiClasses.RecipeWithNutritionsApiResponse;
+import RecipeFinder.entities.Product;
 import RecipeFinder.services.ExternalApiService;
 import RecipeFinder.entities.Recipe;
 import RecipeFinder.services.RecipeService;
@@ -40,8 +42,8 @@ public class RecipeController {
             String url = "https://api.spoonacular.com/recipes/complexSearch?apiKey=" +
                      apiKey + "&query=" + keyword+"&number="+numOfExternalRecipes;
             RestTemplate restTemplate = new RestTemplate();
-            ExternalApiResponse externalapiResponse = restTemplate.getForObject(url,ExternalApiResponse.class);
-            List<Recipe> externalRecipes = externalApiService.transformResponse(externalapiResponse);
+            ExternalRecipesResponse externalApiResponse = restTemplate.getForObject(url, ExternalRecipesResponse.class);
+            List<Recipe> externalRecipes = externalApiService.transformRecipeResponse(externalApiResponse);
             List<Recipe> combinedListOfRecipes = Stream.concat(userSavedRecipes.stream(), externalRecipes.stream()).toList();
             return combinedListOfRecipes;
         }else{
@@ -67,4 +69,23 @@ public class RecipeController {
             return userSavedRecipes;
         }
     }
+
+    @GetMapping("/ingredients")
+    public List<Product> getProducts(@RequestParam String keyword){
+        List<Product> productsFromDB = recipeService.getProducts(keyword);
+        if(productsFromDB.size()<10){
+            String apiKey = externalApiService.getApiKey();
+            Integer numOfExternalRecipes = 10 - productsFromDB.size();
+            String url = "https://api.spoonacular.com/food/ingredients/search?apiKey=" +
+                    apiKey + "&query=" + keyword+"&number="+numOfExternalRecipes;
+            RestTemplate restTemplate = new RestTemplate();
+            ExternalIngredientsResponse externalApiResponse = restTemplate.getForObject(url,ExternalIngredientsResponse.class);
+            List<Product> externalProducts = externalApiService.transformProductResponse(externalApiResponse);
+            List<Product> combinedListOfProducts = Stream.concat(productsFromDB.stream(), externalProducts.stream()).toList();
+            return combinedListOfProducts;
+        }else{
+            return productsFromDB;
+        }
+    }
 }
+
