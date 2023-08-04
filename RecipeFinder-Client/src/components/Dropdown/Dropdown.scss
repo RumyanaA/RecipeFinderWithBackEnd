@@ -1,0 +1,33 @@
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    width:70px;
+  }
+  .dropdown-content{
+    display: block;
+    position: absolute;
+    background-color: white;
+    width: 140px;
+    height: 15rem;
+    overflow-y: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 10px 2px 2px 10px;
+  }
+  .dropdown-content p{
+    margin:0;
+  }
+  
+  .dropbtn{
+    border-radius: 6px;
+    display: block;
+    background-color: #f1f1f1;
+    padding: 0.4rem 0.4rem;
+    width: inherit;
+    height: 42px;
+    border: 2px solid grey;
+  }
+  
+
+  
+  

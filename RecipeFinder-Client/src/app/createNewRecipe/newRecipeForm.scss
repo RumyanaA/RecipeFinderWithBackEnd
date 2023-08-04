@@ -1,0 +1,54 @@
+
+.custom-recipe-title{
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid blue;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+}
+.textarea-container{
+    display:flex;
+    flex-direction: column;
+}
+.form-container{
+    display: flex;
+    justify-content: space-around;
+}
+.inputs-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: fit-content;
+    row-gap: 20px;
+}
+.recipe-image-preview{
+    width: 245px;
+    max-height: 157px;
+    position: absolute;
+    left: 445px;
+    top: 270px;
+}
+.file-input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 55px;
+    width: 245px;
+}
+.checkbox-and-label-container{
+    margin-bottom: 35px;
+    margin-top: 15px;
+    display: flex;
+    column-gap: 17px;
+}
+.checkbox-input{
+    height: 28px;
+    width: 18px;
+}
+
+.save-btn-container{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    margin-top:15px;
+}

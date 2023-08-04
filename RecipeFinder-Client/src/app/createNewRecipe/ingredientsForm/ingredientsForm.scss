@@ -1,0 +1,36 @@
+@import '../../../colors.scss';
+
+.ingredients-container{
+    padding-left:60px;
+}
+.ingredient-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 25px;
+}
+.dropdown-and-label{
+    display:flex;
+    flex-direction: column;
+}
+.number-input{
+    width:96px;
+}
+.image-ingredients{
+    width: 615px;
+    height: 625px;
+    opacity: 0.2;
+    position: absolute;
+}
+.recipe-ingredients-header{
+    position: absolute;
+    margin-top: 140px;
+}
+.selected-ingredients-container{
+    position: absolute;
+    overflow-y: auto;
+    height: 255px;
+    width: 305px;
+    margin-top: 175px;
+}

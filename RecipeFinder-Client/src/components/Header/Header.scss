@@ -1,0 +1,38 @@
+@import "../../colors";
+
+.header-container {
+  margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  .app-name {
+    display: flex;
+    margin-left: 4rem;
+    color: $main-brand-color;
+    cursor: pointer;
+    .logo {
+      height: 4rem;
+      width: 3rem;
+      margin-right: 1rem;
+    }
+  }
+
+  .username-logout-container{
+    display: flex;
+    align-items: baseline;
+    margin-right: 55px;
+  }
+
+  .user-name {
+    margin-right: 10px;
+  }
+}
+
+// Mobile
+@media only screen and (max-width: 640px) {
+  .name {
+    display: none;
+  }
+}

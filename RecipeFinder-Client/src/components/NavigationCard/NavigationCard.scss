@@ -1,0 +1,18 @@
+@import '../../colors';
+
+.card {
+  box-sizing: border-box;
+  width: 16.5rem;
+  height: 17.5rem;
+  padding: 1rem 3rem;
+  margin: 1rem 1.2rem;
+  display: block;
+  border-radius: 4%;
+  background-color: peachpuff;
+  border:2px outset $main-brand-color;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $secondary-color;
+  }
+}

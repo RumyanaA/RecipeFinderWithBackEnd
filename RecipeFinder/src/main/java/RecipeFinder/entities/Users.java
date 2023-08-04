@@ -17,10 +17,13 @@ public class Users implements Serializable {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "addedBy")
+    @Transient
+    private Meal meal;
+
+    @OneToMany(mappedBy = "addedBy", cascade=CascadeType.ALL)
     private List<Recipe> recipes;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_favourite_recipe",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -35,7 +38,24 @@ public class Users implements Serializable {
     }
 
 
+
     public Users() {
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    public Set<Recipe> getFavouriteRecipes() {
+        return favouriteRecipes;
+    }
+
+    public void setFavouriteRecipes(Set<Recipe> favouriteRecipes) {
+        this.favouriteRecipes = favouriteRecipes;
     }
 
     public Long getId() {

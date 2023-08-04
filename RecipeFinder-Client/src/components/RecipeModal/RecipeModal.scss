@@ -1,0 +1,32 @@
+.modal-dialog {
+    max-width: 60rem;
+    .modal-content {
+      width: 60rem;
+        left:0;
+        top:20px;
+      .modal-header {
+        flex-direction: column;
+      }
+      .recipe-img-modal {
+        width: 15rem;
+      }
+      .modal-paragraph {
+        font-weight: 700;
+      }
+      .ingredients-and-favourite-icon{
+        display: flex;
+        justify-content: flex-start;
+        column-gap: 376px;
+      }   
+      .ingridients {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 1rem;
+  
+        .ingridient-div {
+          width: 15rem;
+          display: flex;
+        }
+      }
+    }
+  }

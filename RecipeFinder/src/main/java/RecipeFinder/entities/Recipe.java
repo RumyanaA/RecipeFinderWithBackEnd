@@ -1,8 +1,14 @@
 package RecipeFinder.entities;
+import RecipeFinder.interfaces.ProductInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 @Entity
 @Table
@@ -11,31 +17,35 @@ public class Recipe {
     @GeneratedValue
     private Long id;
     private String title;
-    private String directions;
+    @Column(columnDefinition="TEXT")
+    private String instructions;
+    @Column(columnDefinition="TEXT")
     private String image;
     private Integer fat;
     private Integer calories;
     private Integer carbs;
     private Integer protein;
-    @ManyToOne
+    @Transient
+    private Meal meal;
+    @Transient
+    private List<ProductInfo> extendedIngredients;
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "addedBy")
-    @JsonIgnore
+    @JsonInclude(NON_NULL)
     private Users addedBy;
 
-    @ManyToMany
-    @JoinTable(
-            name = "recipe_product",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    Set<Product> ingredients;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "recipe")
+    private Set<RecipeProduct> ingredients = new HashSet<>();
 
-    @ManyToMany(mappedBy = "favouriteRecipes")
+    @ManyToMany(mappedBy = "favouriteRecipes",  cascade=CascadeType.ALL )
+    @JsonInclude(NON_NULL)
     Set<Users> user;
 
-    public Recipe(Long id, String title, String directions, String image, Integer fat, Integer calories, Integer carbs, Integer protein, Users addedBy, Set<Product> ingredients, Set<Users> user) {
+    public Recipe(Long id, String title, String instructions, String image, Integer fat, Integer calories, Integer carbs, Integer protein, Users addedBy, Set<RecipeProduct> ingredients, Set<Users> user) {
         this.id = id;
         this.title = title;
-        this.directions = directions;
+        this.instructions = instructions;
         this.image = image;
         this.fat = fat;
         this.calories = calories;
@@ -46,7 +56,16 @@ public class Recipe {
         this.user = user;
     }
 
+
     public Recipe() {
+    }
+
+    public List<ProductInfo> getExtendedIngredients() {
+        return extendedIngredients;
+    }
+
+    public void setExtendedIngredients(List<ProductInfo> extendedIngredients) {
+        this.extendedIngredients = extendedIngredients;
     }
 
     public Long getId() {
@@ -65,12 +84,12 @@ public class Recipe {
         this.title = title;
     }
 
-    public String getDirections() {
-        return directions;
+    public String getInstructions() {
+        return instructions;
     }
 
-    public void setDirections(String directions) {
-        this.directions = directions;
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 
     public String getImage() {
@@ -113,19 +132,12 @@ public class Recipe {
         this.protein = protein;
     }
 
-    public Users getAddedBy() {
-        return addedBy;
-    }
 
-    public void setAddedBy(Users addedBy) {
-        this.addedBy = addedBy;
-    }
-
-    public Set<Product> getIngredients() {
+    public Set<RecipeProduct> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Set<Product> ingredients) {
+    public void setIngredients(Set<RecipeProduct> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -135,5 +147,13 @@ public class Recipe {
 
     public void setUser(Set<Users> user) {
         this.user = user;
+    }
+
+    public Users getAddedBy() {
+        return addedBy;
+    }
+
+    public void setAddedBy(Users addedBy) {
+        this.addedBy = addedBy;
     }
 }

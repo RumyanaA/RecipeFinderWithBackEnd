@@ -1,0 +1,14 @@
+.fav-recipes-header{
+    display: flex;
+    justify-content: center;
+    margin-bottom:25px;
+}
+
+.fav-recipes{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+}
+.fav-recipes-container{
+    min-height: 478px;  
+}
