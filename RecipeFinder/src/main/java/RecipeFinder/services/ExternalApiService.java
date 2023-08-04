@@ -6,13 +6,11 @@ import RecipeFinder.entities.Recipe;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class ExternalApiService {
-    private static final String apiKey = "2a5063ca93b046489d3923f17426e210";
+    private static final String apiKey = "f18bfba18484488fb3297993e495b7fd";
 
     public String getApiKey(){
         return apiKey;
@@ -30,7 +28,6 @@ public class ExternalApiService {
             }
             return transformedResponse;
     }
-
     public List<Product> transformProductResponse(ExternalIngredientsResponse apiResponse){
         List<Product> transformedResponse = new ArrayList<>();
         List<ExternalIngredient> result = apiResponse.getResults();
@@ -63,32 +60,5 @@ public class ExternalApiService {
         }
         return transformedResponse;
 
-    }
-
-    private Set<Product> transformRecipeIngredients(List<ExternalMissedOrUnusedIngredient> ingredients){
-        Set<Product> transformedResponse = new HashSet<>();
-        for(ExternalMissedOrUnusedIngredient ingredient: ingredients){
-            Product currentProduct = new Product();
-            currentProduct.setId(ingredient.getId());
-            currentProduct.setImage(ingredient.getImage());
-            currentProduct.setTitle(ingredient.getName());
-            transformedResponse.add(currentProduct);
-        }
-        return transformedResponse;
-
-    }
-
-    public List<Recipe> transformRecipesByIngredientsResponse(List<ExternalRecipesByIngredientsResponse> apiResponse){
-        List<Recipe> transformedResponse = new ArrayList<>();
-        for(ExternalRecipesByIngredientsResponse currentResult: apiResponse){
-            Recipe currentRecipe = new Recipe();
-            currentRecipe.setId(currentResult.getId());
-            currentRecipe.setTitle(currentResult.getTitle());
-            currentRecipe.setImage(currentResult.getImage());
-            List<ExternalMissedOrUnusedIngredient> recipeUsedIngredients = currentResult.getUsedIngredients();
-//            currentRecipe.setIngredients(this.transformRecipeIngredients(recipeUsedIngredients));
-            transformedResponse.add(currentRecipe);
-        }
-        return transformedResponse;
     }
 }
